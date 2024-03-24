@@ -2,6 +2,13 @@
 
 I wrote this guide for myself in case I ever decide to reinstall my ZenBook Pro Duo. Most information you can find here are from online forums, documentations and video guides.
 
+## Known issues
+
+### Secondary screen brightness
+
+- Secondary screen brightness does not seem to be affected by the brightness control buttons.
+- UX582HS speakers do not work at the moment and there is no known solutions for this problem
+
 ## Installing Fedora 39
 
 Special buttons work out of the box. Brightness, keyboard backlight, volume control, screenshot etc.
