@@ -40,6 +40,47 @@ https://web.archive.org/web/20240324193414/https://www.spinics.net/lists/alsa-de
 
 **Unfortunatelly this did not work for me with the UX582HS laptop. If you know the solution, please raise an issue under this repository.**
 
+## Battery charging threshold
+
+Confirm that your system finds BAT* (BAT0 in my case) under the following path
+
+    ls /sys/class/power_supply
+
+You should have the following file by default
+
+    ll /sys/class/power_supply/BAT0/charge_control_end_threshold
+
+It should only contain the number 100. This is the threshold. With the default windows installation on a Zenbook Pro Duo, Asus sets the charging threshold to 60% if you choose the maximum battery life option in the MyAsus configurations. For this reason I always set this value to 60 as well.
+
+This value needs to be set after every reboot, so create a systemd service that runs automatically
+
+/etc/systemd/system/battery-charge-threshold.service
+
+    [Unit]
+    Description=Set the battery charge threshold
+    After=multi-user.target
+    StartLimitBurst=0
+
+    [Service]
+    Type=oneshot
+    Restart=on-failure
+    ExecStart=/bin/bash -c 'echo 60 > /sys/class/power_supply/BAT0/charge_control_end_threshold'
+
+    [Install]
+    WantedBy=multi-user.target
+
+Then start and enable the service
+
+    systemctl start battery-charge-threshold.service
+    systemctl enable battery-charge-threshold.service
+
+## Nvidia drivers
+
+The following site has a guide on how to install nvidia proprietary driver instead of the nouveau driver
+
+    https://asus-linux.org/guides/fedora-guide/
+
+
 ## My always installed programs
 
 btop - system monitor
