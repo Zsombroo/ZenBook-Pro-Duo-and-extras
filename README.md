@@ -2,6 +2,17 @@
 
 I wrote this guide for myself in case I ever decide to reinstall my ZenBook Pro Duo. Most information you can find here are from online forums, documentations and video guides. FYI I am using wayland.
 
+## Open questions
+
+### How to get real cpu temp?
+
+There is an Intel digital thermal sensor with loaded 'coretemp' driver.
+
+    sudo dnf install lm_sensors
+    sensors
+
+lm-sensors however reports guessed temperature based on the load, therefore it is not the real temperature of the cpu. Is there a way to see the real cpu temp?
+
 ## Installing Fedora 39
 
 Special buttons work out of the box. Brightness, keyboard backlight, volume control, screenshot etc.
@@ -227,3 +238,23 @@ Then go to terminal settings and change the font.
 Add this line to kitty conf
 
     include ./theme.conf
+
+## Fan speed control
+
+Fan speed can be controlled through the following file
+
+    /sys/devices/platform/asus-nb-wmi/hwmon/hwmon*/pwm1_enable
+
+- 2 means fan speed is set to auto control
+- 0 means full speed
+
+## System monitoring
+
+I mainly user btop for this task.
+
+Another option to monitor the cpu:
+
+    sudo dnf install s-tui
+    s-tui
+
+This shows temperature, frequency, utilization and cpu fan rpm. It can also stress test the cpu.
