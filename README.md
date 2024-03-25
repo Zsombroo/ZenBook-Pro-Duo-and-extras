@@ -1,13 +1,6 @@
 # ZenBook-Pro-Duo-install-guide
 
-I wrote this guide for myself in case I ever decide to reinstall my ZenBook Pro Duo. Most information you can find here are from online forums, documentations and video guides.
-
-## Known issues
-
-### Secondary screen brightness
-
-- Secondary screen brightness does not seem to be affected by the brightness control buttons.
-- UX582HS speakers do not work at the moment and there is no known solutions for this problem
+I wrote this guide for myself in case I ever decide to reinstall my ZenBook Pro Duo. Most information you can find here are from online forums, documentations and video guides. FYI I am using wayland.
 
 ## Installing Fedora 39
 
@@ -80,6 +73,28 @@ Then start and enable the service
 
     systemctl start battery-charge-threshold.service
     systemctl enable battery-charge-threshold.service
+
+## Secondary screen brightness
+
+You can control the secondary screen brightness with brightnessctl
+
+    sudo dnf install brightnessctl
+
+Listing the devices
+
+    brightnessctl --list
+
+    Device 'intel_backlight' of class 'backlight':
+        Current brightness: 268 (51%)
+        Max brightness: 528
+
+    Device 'asus_screenpad' of class 'backlight':
+        Current brightness: 62 (26%)
+        Max brightness: 235
+
+The 'asus_screenpad' device is the secondary screen. To change the brightness, use the following command
+
+    brightnessctl -d asus_screenpad set 100%
 
 ## Nvidia drivers
 
