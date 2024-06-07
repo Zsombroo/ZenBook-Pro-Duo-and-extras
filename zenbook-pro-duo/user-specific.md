@@ -23,8 +23,8 @@ First let's clone our password store git repository.
 Now import our gpg keys assuming they are stored in ~/exported-keys
 
     cd exported-keys
-    gpg --import private.gpg
-    gpg --import prublic.gpg
+    gpg --import private.pgp
+    gpg --import public.pgp
 
     gpg --edit-key {gpg-key-id}
     gpg> trust
