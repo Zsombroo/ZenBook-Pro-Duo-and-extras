@@ -124,3 +124,20 @@ Then go to terminal settings and change the font.
 Add this line to kitty conf
 
     include ./theme.conf
+
+PS1 variable
+
+    # Define colors
+    GREEN='\[\e[0;32m\]'
+    BLUE='\[\e[0;34m\]'
+    YELLOW='\[\e[0;33m\]'
+    MAGENTA='\[\e[0;35m\]'
+    RESET='\[\e[0m\]'
+    
+    # Function to get the current Git branch
+    get_git_branch() {
+      git symbolic-ref --short HEAD 2>/dev/null
+    }
+    
+    # Define the PS1 variable
+    PS1="${GREEN}\u${RESET}@${BLUE}\h${RESET}:${YELLOW}\w${RESET}\$( [ -n \"\$(git rev-parse --is-inside-work-tree 2>/dev/null)\" ] && echo \" (${MAGENTA}\$(get_git_branch)${RESET})\")\$ "
